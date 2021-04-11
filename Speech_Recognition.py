@@ -153,7 +153,7 @@ while True:
     elif text == 'close':
         quit()
 #----------------------------#
-    elif text == 'bruh':
+    elif text == 'Jake Paul':
         playsound('BRUH.mp3')
                                                         #Meme Section by FURRO404 && Sonic26
 #==============FURRO404==============#

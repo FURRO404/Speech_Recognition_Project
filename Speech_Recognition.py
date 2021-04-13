@@ -8,7 +8,12 @@ from playsound import playsound
 r = sr.Recognizer()
 def bruh():
     Listen()
-    
+
+def Cancel_Checker():
+    cancel = 'cancel'
+    if any(cancel in word for word in text):    #Cancel Function
+        print("CANCELLED!")
+        bruh()
 def Text_Deconstructor():
     global L_text
     L_text = []
@@ -25,6 +30,7 @@ def Listen():
             print('You said: ', text)
             Text_Deconstructor()
             text = L_text
+            Cancel_Checker()
         except:
             print('Sorry could not recognize your voice')
             bruh()
@@ -46,7 +52,6 @@ def Add():
         
     print("The sum is: ", fnum + snum)
     playsound('YAY.mp3')
-    time.sleep(2)
     print("\n\n")
 #------------------------Subtraction------------------------#
 def Subtract():    
@@ -68,9 +73,7 @@ def Subtract():
     elif text[2] != "from":
         print("The difference is: ", fnum - snum)
 
-        
     playsound('YAY.mp3')
-    time.sleep(2)
     print("\n\n")
 #------------------------Division------------------------#
 def Divide():
@@ -88,7 +91,6 @@ def Divide():
         
     print("The quotient is: ", fnum / snum)
     playsound('YAY.mp3')
-    time.sleep(2)
     print("\n\n")
 #------------------------Multiplication------------------------#
 def Multiply():
@@ -106,24 +108,22 @@ def Multiply():
         
     print("The product is: ", fnum * snum)
     playsound('YAY.mp3')
-    time.sleep(2)
     print("\n\n")
 #^^^^^^^^^^^^^^^MATH^^^^^^^^^^^^^^^#
 #----------------------------#
 while True:
-    print("Command: ")
     Listen()
 #----------------------------#
-    if text[0] == 'add':
+    if text[0] == 'add' or text[0] == 'Add':
         Add()
 
-    elif text[0] == 'subtract':
+    elif text[0] == 'subtract' or text[0] == 'Subtract':
         Subtract()
                                                     #Math Section by FURRO404
-    elif text[0] == 'divide':
+    elif text[0] == 'divide' or text[0] == 'Divide':
         Divide()
         
-    elif text[0] == 'multiply':
+    elif text[0] == 'multiply' or text[0] == 'Multiply':
         Multiply()
 #----------------------------#
     elif text[0] == 'exit':

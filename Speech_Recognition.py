@@ -14,6 +14,7 @@ def Cancel_Checker():
     if any(cancel in word for word in text):    #Cancel Function
         print("CANCELLED!")
         bruh()
+
 def Text_Deconstructor():
     global L_text
     L_text = []

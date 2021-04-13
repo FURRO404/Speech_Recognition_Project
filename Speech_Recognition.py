@@ -27,7 +27,6 @@ def Listen():
             text = L_text
         except:
             print('Sorry could not recognize your voice')
-            text = "ERR"
             bruh()
         return text
 #===============MATH===============#

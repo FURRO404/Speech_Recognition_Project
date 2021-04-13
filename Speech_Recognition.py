@@ -70,7 +70,7 @@ def Subtract():
 
     if text[2] == "from":
         print("The difference is: ", snum - fnum)
-                                                                                #Human Error Correction
+                                                    #Human Error Correction
     elif text[2] != "from":
         print("The difference is: ", fnum - snum)
 

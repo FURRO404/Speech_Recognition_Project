@@ -32,7 +32,17 @@ def Translate():
                 untranslated += ' '
 
             translation = translator.translate(untranslated, dest=code)
-            print(translation.origin, ' -> ', translation.text)
+            print(translation.origin, ' -> ', translation.text)     #Translate
+
+            while user == 'unsatisfied':
+                try:
+                    sentence = gTTS(translation.text, lang = code)
+                    sentence.save('Sentence.mp3')
+                    playsound('Sentence.mp3')       #Text to Speech
+                    os.remove('Sentence.mp3')
+                except:
+                    print("Language cannot be spoken due to unsupported language choice")
+                break
             user = "satisfied"
 
 def bruh():
@@ -179,3 +189,4 @@ while True:
         playsound('HappyBirthday.mp3')
 #----------------------------#
 #==============FURRO404==============#
+

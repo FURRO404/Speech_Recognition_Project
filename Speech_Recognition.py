@@ -42,6 +42,7 @@ def Translate():
                     os.remove('Sentence.mp3')
                 except:
                     print("Language cannot be spoken due to unsupported language choice")
+                    
                 break
             user = "satisfied"
 

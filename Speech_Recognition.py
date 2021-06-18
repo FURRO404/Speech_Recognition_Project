@@ -7,6 +7,7 @@ import random
 from playsound import playsound
 from gtts import gTTS
 import os
+import Languages
 #---------------------------------#
 r = sr.Recognizer()
 
@@ -20,12 +21,12 @@ def Translate():
         if text[x] != 'to':
             original.append(text[x])
             x = x + 1
+            
         elif text[x] == 'to':
             code = text[x+1]
-            if code == 'German':
-                code = 'de'
-
+            code = Languages.langcodes[code]
             untranslated = ""
+            
             for letter in original: 
                 untranslated += letter
                 untranslated += ' '
@@ -142,12 +143,10 @@ def Multiply():
 #^^^^^^^^^^^^^^^MATH^^^^^^^^^^^^^^^#
 
 
-
-
 #----------------------------#
 while True:
+    wait = input("\nPress enter to speak ")
     Listen()
-    print("NEW")
 #----------------------------#
     if text[0] == 'add' or text[0] == 'Add':
         Add()

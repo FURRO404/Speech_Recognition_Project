@@ -5,4 +5,5 @@ Currently does:
  - MATH
  - MEMES (lol)
  - SINGS YOU HAPPY BIRTHDAY!
+ - LANGUAGE TRANSLATION
  - Whats next??

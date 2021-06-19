@@ -1,8 +1,8 @@
 #==============FURRO404==============#
 #Speech_Recognition_Project.py
 #-----Misc Python Modules-----#
-import speech_recognition as sr
 from googletrans import Translator 
+import speech_recognition as sr
 import time
 import random
 from playsound import playsound
@@ -14,54 +14,58 @@ import Languages
 r = sr.Recognizer()
 
 def Translate():
-    translator = Translator()
-    x = 1
-    original = []
-    user = "unsatisfied"
-    
-    while user == "unsatisfied":
-        if text[x] != 'to':
-            original.append(text[x])
-            x = x + 1
-            
-        elif text[x] == 'to':
-            code = text[x+1]
-            code = Languages.langcodes[code]
-            untranslated = ""
-            
-            for letter in original: 
-                untranslated += letter
-                untranslated += ' '
-
-            translation = translator.translate(untranslated, dest=code)
-            print(translation.origin, ' -> ', translation.text)     #Translate
-
-            while user == 'unsatisfied':
-                try:
-                    sentence = gTTS(translation.text, lang = code)
-                    sentence.save('Sentence.mp3')
-                    playsound('Sentence.mp3')       #Text to Speech
-
-                    print("Say repeat to listen again.")
-                    wait = input("\nPress enter to speak ")
-                    Listen()
+    if 'to' in text:
+        translator = Translator()
+        x = 1
+        original = []
+        user = "unsatisfied"
+        
+        while user == "unsatisfied":
+            if text[x] != 'to':
+                original.append(text[x])
+                x = x + 1
+                            
+            elif text[x] == 'to':
+                code = text[x+1]
+                code = Languages.langcodes[code]
+                untranslated = ""
+                
+                for letter in original: 
+                    untranslated += letter
+                    untranslated += ' '
                     
-                    if text[0] == 'repeat':
-                        while True:
-                            playsound('Sentence.mp3')
-                            print("Say continue to continue back to app or say repeat to repeat again.")
-                            wait = input("\nPress enter to speak ")
-                            Listen()
-                            if text[0] != 'repeat':
-                                os.remove('Sentence.mp3')
-                                break
+                translation = translator.translate(untranslated, dest=code)
+                print(translation.origin, ' -> ', translation.text)     #Translate
+
+                while user == 'unsatisfied':
+                    try:
+                        sentence = gTTS(translation.text, lang = code)
+                        sentence.save('Sentence.mp3')
+                        playsound('Sentence.mp3')       #Text to Speech
+
+                        print("Say repeat to listen again.")
+                        wait = input("\nPress enter to speak ")
+                        Listen()
                         
-                except:
-                    print("Language cannot be spoken due to unsupported language choice.")
-                    
-                break
-            user = "satisfied"
+                        if text[0] == 'repeat':
+                            while True:
+                                playsound('Sentence.mp3')
+                                print("Say continue to continue back to app or say repeat to repeat again.")
+                                wait = input("\nPress enter to speak ")
+                                Listen()
+                                if text[0] != 'repeat':
+                                    os.remove('Sentence.mp3')
+                                    break
+                            
+                    except:
+                        print("Language cannot be spoken due to unsupported language choice.")
+                        
+                    break
+                user = "satisfied"
+    else:
+        print("Translate function not properly used.")
 
+        
 def bruh():
     Listen()
 
@@ -206,3 +210,4 @@ while True:
         playsound('HappyBirthday.mp3')
 #----------------------------#
 #==============FURRO404==============#
+

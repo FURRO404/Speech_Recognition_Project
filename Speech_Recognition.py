@@ -1,17 +1,28 @@
 #==============FURRO404==============#
 #Speech_Recognition_Project.py
 #-----Misc Python Modules-----#
-from googletrans import Translator 
-import speech_recognition as sr
-import time
-import random
-from playsound import playsound
+from googletrans import Translator
+from googlesearch import search
 from gtts import gTTS
 import os
+from playsound import playsound
+import random
+import speech_recognition as sr
+import time
 #-----Seperate Python Files-----#
 import Languages
 #---------------------------------#
-r = sr.Recognizer()
+def Google_Seach():
+    text.remove(text[0])
+    query = ""
+    
+    for letter in text: 
+                    query += letter
+                    query += ' '
+
+    print("Googling the top 10 results for:", query)
+    for result in search(query, tld="co.in", stop=10, pause=2):
+        print("\n", result)
 
 def Translate():
     if 'to' in text:
@@ -66,15 +77,15 @@ def Translate():
         print("Translate function not properly used.")
 
         
-def bruh():
+def Retry():
     Listen()
 
 def Cancel_Checker():
     cancel = 'cancel'
     if any(cancel in word for word in text):    #Cancel Function
         print("CANCELLED!")
-    return text
-    
+        quit()
+        
 def Text_Deconstructor():
     global L_text
     L_text = []
@@ -94,7 +105,7 @@ def Listen():
             Cancel_Checker()
         except:
             print('Sorry could not recognize your voice')
-            bruh()
+            Retry()
         return text
 #===============MATH===============#
 #------------------------Addition------------------------#
@@ -174,7 +185,8 @@ def Multiply():
 #^^^^^^^^^^^^^^^MATH^^^^^^^^^^^^^^^#
 
 
-#----------------------------#
+#--------------Driver Code---------------#
+r = sr.Recognizer()
 while True:
     wait = input("\nPress enter to speak ")
     Listen()
@@ -196,12 +208,15 @@ while True:
 
     elif text[0] == 'quit':             #Exit Section by FURRO404
         quit()
-        
+
     elif text[0] == 'close':
         quit()
 #----------------------------#
     elif text[0] == 'translate':
         Translate()                         #Translation Section by FURRO404
+#----------------------------#
+    elif text[0] == 'Google':
+        Google_Seach()
 #----------------------------#
     elif text[0] == 'Jake' and text[1] == 'Paul':
         playsound('BRUH.mp3')
@@ -210,4 +225,3 @@ while True:
         playsound('HappyBirthday.mp3')
 #----------------------------#
 #==============FURRO404==============#
-

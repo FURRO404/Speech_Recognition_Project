@@ -1,5 +1,8 @@
 # Speech_Recognition_Project
-Interactive Script to do math and meme around with, potential here...
+Interactive Script to do math, translate and meme around with, potential here...
+
+
+**YOU NEED SPEECH RECOGNITION INSTALLED AND CONFIGURED ON YOUR MACHINE, FIND IT HERE: https://github.com/Uberi/speech_recognition**
 
 Currently does:
  - MATH

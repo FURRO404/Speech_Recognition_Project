@@ -1,5 +1,6 @@
 #==============FURRO404==============#
 #Speech_Recognition_Project.py
+#-----Misc Python Modules-----#
 import speech_recognition as sr
 from googletrans import Translator 
 import time
@@ -7,6 +8,7 @@ import random
 from playsound import playsound
 from gtts import gTTS
 import os
+#-----Seperate Python Files-----#
 import Languages
 #---------------------------------#
 r = sr.Recognizer()
@@ -39,9 +41,23 @@ def Translate():
                     sentence = gTTS(translation.text, lang = code)
                     sentence.save('Sentence.mp3')
                     playsound('Sentence.mp3')       #Text to Speech
-                    os.remove('Sentence.mp3')
+
+                    print("Say repeat to listen again.")
+                    wait = input("\nPress enter to speak ")
+                    Listen()
+                    
+                    if text[0] == 'repeat':
+                        while True:
+                            playsound('Sentence.mp3')
+                            print("Say continue to continue back to app or say repeat to repeat again.")
+                            wait = input("\nPress enter to speak ")
+                            Listen()
+                            if text[0] != 'repeat':
+                                os.remove('Sentence.mp3')
+                                break
+                        
                 except:
-                    print("Language cannot be spoken due to unsupported language choice")
+                    print("Language cannot be spoken due to unsupported language choice.")
                     
                 break
             user = "satisfied"
@@ -64,7 +80,7 @@ def Text_Deconstructor():
 def Listen():
     global text
     with sr.Microphone() as source:
-        print("\nListening")
+        print("\nListening.")
         audio = r.listen(source)
         try:
             text = r.recognize_google(audio)
@@ -190,4 +206,3 @@ while True:
         playsound('HappyBirthday.mp3')
 #----------------------------#
 #==============FURRO404==============#
-

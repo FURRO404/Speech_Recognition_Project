@@ -5,6 +5,8 @@ from googletrans import Translator
 from googlesearch import search
 from gtts import gTTS
 import os
+import os.path
+from os import path
 from playsound import playsound
 import random
 import speech_recognition as sr
@@ -23,59 +25,6 @@ def Google_Seach():
     print("Googling the top 10 results for:", query)
     for result in search(query, tld="co.in", stop=10, pause=2):
         print("\n", result)
-
-def Translate():
-    if 'to' in text:
-        translator = Translator()
-        x = 1
-        original = []
-        user = "unsatisfied"
-        
-        while user == "unsatisfied":
-            if text[x] != 'to':
-                original.append(text[x])
-                x = x + 1
-                            
-            elif text[x] == 'to':
-                code = text[x+1]
-                code = Languages.langcodes[code]
-                untranslated = ""
-                
-                for letter in original: 
-                    untranslated += letter
-                    untranslated += ' '
-                    
-                translation = translator.translate(untranslated, dest=code)
-                print(translation.origin, ' -> ', translation.text)     #Translate
-
-                while user == 'unsatisfied':
-                    try:
-                        sentence = gTTS(translation.text, lang = code)
-                        sentence.save('Sentence.mp3')
-                        playsound('Sentence.mp3')       #Text to Speech
-
-                        print("Say repeat to listen again.")
-                        wait = input("\nPress enter to speak ")
-                        Listen()
-                        
-                        if text[0] == 'repeat':
-                            while True:
-                                playsound('Sentence.mp3')
-                                print("Say continue to continue back to app or say repeat to repeat again.")
-                                wait = input("\nPress enter to speak ")
-                                Listen()
-                                if text[0] != 'repeat':
-                                    os.remove('Sentence.mp3')
-                                    break
-                            
-                    except:
-                        print("Language cannot be spoken due to unsupported language choice.")
-                        
-                    break
-                user = "satisfied"
-    else:
-        print("Translate function not properly used.")
-
         
 def Retry():
     Listen()
@@ -107,6 +56,60 @@ def Listen():
             print('Sorry could not recognize your voice')
             Retry()
         return text
+
+    
+#===============LANGUAGE_TRANSLATION===============#
+#------------------------Repeating------------------------#
+def Lang_Listen():
+    while True:
+        print("\nSay repeat to listen again or continue to skip")
+        wait = str(input("Press enter to speak! "))
+        Listen()
+
+        if text[0] == 'repeat':
+            playsound("Sentence.mp3")
+        elif text[0] == 'continue':
+            os.remove('Sentence.mp3')
+            break
+        else:
+            print("Didn't quite catch that")
+#------------------------Translation------------------------#
+def Translate():
+    if 'to' in text:
+        translator = Translator()
+        x = 1
+        original = []
+        user = "unsatisfied"
+        
+        while user == "unsatisfied":
+            if text[x] != 'to':
+                original.append(text[x])
+                x = x + 1
+                            
+            elif text[x] == 'to':
+                code = text[x+1]
+                code = Languages.langcodes[code]
+                untranslated = ""
+                
+                for letter in original: 
+                    untranslated += letter
+                    untranslated += ' '
+                    
+                translation = translator.translate(untranslated, dest=code)
+                print(translation.origin, ' -> ', translation.text)     #Translate
+                while user == 'unsatisfied':
+                    try:
+                        sentence = gTTS(translation.text, lang = code)
+                        sentence.save('Sentence.mp3')
+                        playsound('Sentence.mp3')       #Text to Speech
+                        user = "satisfied"
+                    except:
+                        print("Language cannot be spoken due to unsupported language choice.")
+                        user = "satisfied"
+    else:
+        print("Translate function not properly used.")
+#===============LANGUAGE_TRANSLATION===============#
+
 #===============MATH===============#
 #------------------------Addition------------------------#
 def Add():
@@ -187,9 +190,15 @@ def Multiply():
 
 #--------------Driver Code---------------#
 r = sr.Recognizer()
+if path.exists("Sentence.mp3"):             #Start by clearing old files
+    os.remove('Sentence.mp3')
+    
 while True:
-    wait = input("\nPress enter to speak ")
-    Listen()
+    if path.exists("Sentence.mp3"):                     #If this is true, this isn't the first iteration ;-;
+        Lang_Listen()
+    else:
+        wait = input("\nPress enter to speak ")         #WE WANT THIS THE FIRST TIME
+        Listen()
 #----------------------------#
     if text[0] == 'add' or text[0] == 'Add':
         Add()
@@ -203,19 +212,19 @@ while True:
     elif text[0] == 'multiply' or text[0] == 'Multiply':
         Multiply()
 #----------------------------#
-    elif text[0] == 'exit':
+    elif text[0] == 'exit' or text[0] == 'Exit':
         quit()
 
-    elif text[0] == 'quit':             #Exit Section by FURRO404
+    elif text[0] == 'quit' or text[0] == 'Quit':            #Exit Section by FURRO404
         quit()
 
-    elif text[0] == 'close':
+    elif text[0] == 'close' or text[0] == 'Close':
         quit()
 #----------------------------#
-    elif text[0] == 'translate':
+    elif text[0] == 'translate' or text[0] == 'Translate':
         Translate()                         #Translation Section by FURRO404
 #----------------------------#
-    elif text[0] == 'Google':
+    elif text[0] == 'Google'  or text[0] == 'google':
         Google_Seach()
 #----------------------------#
     elif text[0] == 'Jake' and text[1] == 'Paul':

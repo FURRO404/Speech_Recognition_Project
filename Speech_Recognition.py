@@ -201,6 +201,11 @@ while True:
         Listen()
 #----------------------------#
     if text[0] == 'add' or text[0] == 'Add':
+        if text[1] == 'two':
+            text[1] = '2'
+                                #For some reason, saying "Add two and two" makes two turn into "two" instead of "2", causing an error. Easy fix.
+        if text[3] == 'two':
+            text[3] = '2'
         Add()
 
     elif text[0] == 'subtract' or text[0] == 'Subtract':

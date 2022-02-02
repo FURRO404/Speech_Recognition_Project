@@ -62,13 +62,13 @@ def Listen():
 #------------------------Repeating------------------------#
 def Lang_Listen():
     while True:
-        print("\nSay repeat to listen again or continue to skip")
+        print("\nSay repeat to listen again or speak a different command")
         wait = str(input("Press enter to speak! "))
         Listen()
 
         if text[0] == 'repeat':
             playsound("Sentence.mp3")
-        elif text[0] == 'continue':
+        elif text[0] != 'repeat':
             os.remove('Sentence.mp3')
             break
         else:
@@ -148,7 +148,6 @@ def Subtract():
     elif text[2] != "from":
         print("The difference is: ", fnum - snum)
 
-        
     playsound('YAY.mp3')
     print("\n\n")
 #------------------------Division------------------------#

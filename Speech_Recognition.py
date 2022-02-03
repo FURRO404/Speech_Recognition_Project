@@ -91,12 +91,13 @@ def Translate():
                 code = Languages.langcodes[code]
                 untranslated = ""
                 
-                for letter in original: 
-                    untranslated += letter
+                for word in original: 
+                    untranslated += word #Move each untranslated word into a string from "original" list
                     untranslated += ' '
                     
                 translation = translator.translate(untranslated, dest=code)
                 print(translation.origin, ' -> ', translation.text)     #Translate
+                
                 while user == 'unsatisfied':
                     try:
                         sentence = gTTS(translation.text, lang = code)
@@ -104,7 +105,7 @@ def Translate():
                         playsound('Sentence.mp3')       #Text to Speech
                         user = "satisfied"
                     except:
-                        print("Language cannot be spoken due to unsupported language choice.")
+                        print("Language cannot be spoken due to unsupported language choice.\n")
                         user = "satisfied"
     else:
         print("Translate function not properly used.")
@@ -125,9 +126,8 @@ def Add():
     else:
         snum = int(text[3])
         
-    print("The sum is: ", fnum + snum)
+    print("The sum is: ", fnum + snum, "\n")
     playsound('YAY.mp3')
-    print("\n\n")
 #------------------------Subtraction------------------------#
 def Subtract():    
     if text[1] == "random":
@@ -143,13 +143,12 @@ def Subtract():
         snum = int(text[3])
 
     if text[2] == "from":
-        print("The difference is: ", snum - fnum)
+        print("The difference is: ", snum - fnum, "\n")
                                                                                 #Human Error Correction
     elif text[2] != "from":
-        print("The difference is: ", fnum - snum)
+        print("The difference is: ", fnum - snum, "\n")
 
     playsound('YAY.mp3')
-    print("\n\n")
 #------------------------Division------------------------#
 def Divide():
     if text[1] == "random":
@@ -164,9 +163,8 @@ def Divide():
     else:
         snum = int(text[3])
         
-    print("The quotient is: ", fnum / snum)
+    print("The quotient is: ", fnum / snum, "\n")
     playsound('YAY.mp3')
-    print("\n\n")
 #------------------------Multiplication------------------------#
 def Multiply():
     if text[1] == "random":
@@ -181,9 +179,8 @@ def Multiply():
     else:
         snum = int(text[3])
         
-    print("The product is: ", fnum * snum)
+    print("The product is: ", fnum * snum, "\n")
     playsound('YAY.mp3')
-    print("\n\n")
 #^^^^^^^^^^^^^^^MATH^^^^^^^^^^^^^^^#
 
 
@@ -196,7 +193,7 @@ while True:
     if path.exists("Sentence.mp3"):                     #If this is true, this isn't the first iteration ;-;
         Lang_Listen()
     else:
-        wait = input("\nPress enter to speak ")         #WE WANT THIS THE FIRST TIME
+        wait = input("Press enter to speak ")         #WE WANT THIS THE FIRST TIME
         Listen()
 #----------------------------#
     if text[0] == 'add' or text[0] == 'Add':

@@ -1,5 +1,6 @@
 #==============FURRO404==============#
 #Speech_Recognition_Project.py
+
 #-----Misc Python Modules-----#
 from googletrans import Translator
 from googlesearch import search
@@ -9,10 +10,13 @@ import os.path
 from os import path
 from playsound import playsound
 import random
+import requests
 import speech_recognition as sr
 import time
+
 #-----Seperate Python Files-----#
 import Languages
+
 #---------------------------------#
 def Google_Seach():
     text.remove(text[0])
@@ -111,6 +115,41 @@ def Translate():
         print("Translate function not properly used.")
 #===============LANGUAGE_TRANSLATION===============#
 
+#===============WEATHER===============#
+def Weather():
+    city = ""
+    if len(text) == 3:
+        city = text[2]
+    elif len(text) == 4:
+        city = text[2] + text[3]
+    elif len(text) == 5:
+        city = text[2] + text[3] + text [4]
+
+    api_key = "2432dd0850a123fbc3507a0a79287e07"
+    base_url = "http://api.openweathermap.org/data/2.5/weather?"
+    city_name = city
+    complete_url = base_url + "appid=" + 'd850f7f52bf19300a9eb4b0aa6b80f0d' + "&q=" + city_name
+    
+    response = requests.get(complete_url)
+    x = response.json()
+
+    if x["cod"] != "404":
+        y = x["main"]
+
+        k_temp = y["temp"]
+        f_temp = 1.8*(k_temp-273) + 32
+        f_temp = round(f_temp, ndigits = 2)
+        z = x["weather"]
+
+        weather_description = z[0]["description"]
+
+        print(" Temperature (shown in Fahrenheit) = " +
+                        str(f_temp) +
+              "\n description = " +
+                        str(weather_description))
+
+    else:
+        print(" City Not Found ")
 #===============MATH===============#
 #------------------------Addition------------------------#
 def Add():
@@ -234,4 +273,6 @@ while True:
     elif text[0] == 'happy' and text[1] == 'birthday':
         playsound('HappyBirthday.mp3')
 #----------------------------#
+    elif text[0] == "weather" or text[0] == "Weather":                      #Weather Section by FURRO404 && Femboy
+        Weather()
 #==============FURRO404==============#

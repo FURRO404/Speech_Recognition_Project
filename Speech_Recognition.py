@@ -16,7 +16,6 @@ import time
 
 #-----Seperate Python Files-----#
 import Languages
-
 #---------------------------------#
 def Google_Seach():
     text.remove(text[0])

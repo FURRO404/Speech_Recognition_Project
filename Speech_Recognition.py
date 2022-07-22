@@ -17,7 +17,7 @@ import time
 #-----Seperate Python Files-----#
 import Languages
 #---------------------------------#
-def Google_Seach():
+def Google_Search():
     text.remove(text[0])
     query = ""
     
@@ -266,7 +266,7 @@ while True:
         Translate()                         #Translation Section by FURRO404
 #----------------------------#
     elif text[0] == 'Google'  or text[0] == 'google':
-        Google_Seach()
+        Google_Search()
 #----------------------------#
     elif text[0] == 'Jake' and text[1] == 'Paul':
         playsound('BRUH.mp3')

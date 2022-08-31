@@ -45,10 +45,13 @@ def Text_Deconstructor():
     return L_text
     
 def Listen():
+    r = sr.Recognizer()
+    mic = sr.Microphone(device_index=1)
     global text
-    with sr.Microphone() as source:
+    with mic as source:
+        r.adjust_for_ambient_noise(source)
         print("\nListening.")
-        audio = r.listen(source)
+        audio = r.record(source=mic, duration=5)
         try:
             text = r.recognize_google(audio)
             print('You said: ', text)
@@ -148,7 +151,7 @@ def Weather():
                         str(weather_description))
 
     else:
-        print(" City Not Found ")
+        print(" City Not Found\n\n")
 #===============WEATHER===============#
 
 #===============MATH===============#
@@ -225,7 +228,7 @@ def Multiply():
 
 
 #--------------Driver Code---------------#
-r = sr.Recognizer()
+
 if path.exists("Sentence.mp3"):             #Start by clearing old files
     os.remove('Sentence.mp3')
     

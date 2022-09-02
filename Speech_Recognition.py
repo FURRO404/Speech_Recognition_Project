@@ -123,9 +123,10 @@ def Weather():
     if len(text) == 3:
         city = text[2]
     elif len(text) == 4:
-        city = text[2] + text[3]
+        city = text[2] + " " + text[3]
     elif len(text) == 5:
-        city = text[2] + text[3] + text [4]
+        city = text[2] + " " + text[3] + " " + text [4]
+    print(f"\nLooking for {city}\n")
 
     api_key = "2432dd0850a123fbc3507a0a79287e07"
     base_url = "http://api.openweathermap.org/data/2.5/weather?"
@@ -145,13 +146,14 @@ def Weather():
 
         weather_description = z[0]["description"]
 
-        print(" Temperature (shown in Fahrenheit) = " +
+        print("Temperature (shown in Fahrenheit) = " +
                         str(f_temp) +
-              "\n description = " +
-                        str(weather_description))
+              "\ndescription: " +
+                        str(weather_description) +
+              "\n")
 
     else:
-        print(" City Not Found\n\n")
+        print("City Not Found\n\n")
 #===============WEATHER===============#
 
 #===============MATH===============#
